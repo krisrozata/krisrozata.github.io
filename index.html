@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kristiyan Georgiev — Software Engineer</title>
+<meta name="description" content="Kristiyan Georgiev — software engineering student building projects in C#, Java and Python. Open to my first developer role." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --ink: #14161c;
+    --muted: #5b6472;
+    --faint: #8a93a3;
+    --line: #dde2ea;
+    --accent: #2b41f2;
+    --accent-soft: #e7eaff;
+    --amber: #f5a524;
+    --radius: 14px;
+    --maxw: 1060px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(238,241,245,0.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-spacing: -0.02em; font-size: 1.05rem; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 26px; align-items: center; }
+  .nav-links a { font-size: 0.82rem; color: var(--muted); font-weight: 500; transition: color .18s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a.gh { color: var(--accent); }
+  @media (max-width: 620px){ .nav-links a:not(.gh){ display:none; } }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 84px 0 60px; }
+  .hero-grid { display: grid; grid-template-columns: 1.35fr 1fr; gap: 48px; align-items: start; }
+  .eyebrow { font-size: 0.78rem; color: var(--accent); letter-spacing: 0.04em; margin-bottom: 22px; }
+  .eyebrow b { color: var(--faint); font-weight: 400; }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.6rem, 7vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+  .hero-sub {
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: var(--muted);
+    margin-top: 22px; max-width: 30ch;
+  }
+  .hero-sub b { color: var(--ink); font-weight: 600; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 18px; border-radius: 10px;
+    font-size: 0.88rem; font-weight: 600;
+    border: 1px solid var(--line); background: var(--surface);
+    transition: transform .15s, border-color .15s, background .15s;
+  }
+  .btn:hover { transform: translateY(-2px); border-color: var(--ink); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { background: #1f33d6; border-color: #1f33d6; }
+
+  /* spec card — the signature element */
+  .spec {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .spec-head {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px; border-bottom: 1px solid var(--line);
+    font-size: 0.72rem; color: var(--faint); letter-spacing: 0.05em;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); box-shadow: 0 0 0 3px rgba(245,165,36,0.18); }
+  .spec-body {
+    padding: 6px 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px);
+    background-size: 100% 38px;
+    background-position: 0 6px;
+  }
+  .spec-row { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 16px; font-size: 0.82rem; height: 38px; }
+  .spec-row .k { color: var(--faint); }
+  .spec-row .v { color: var(--ink); font-weight: 500; text-align: right; }
+  .spec-row .v.live { color: var(--accent); }
+
+  /* ---------- section scaffolding ---------- */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  .sec-label { font-size: 0.74rem; color: var(--faint); letter-spacing: 0.08em; margin-bottom: 28px; display: flex; align-items: center; gap: 10px; }
+  .sec-label::before { content: ""; width: 22px; height: 1px; background: var(--accent); }
+  h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: clamp(1.5rem,3.5vw,2rem); letter-spacing: -0.02em; margin-bottom: 8px; }
+
+  /* ---------- skills ---------- */
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 40px; }
+  .skill-line { display: grid; grid-template-columns: 92px 1fr; gap: 14px; align-items: start; padding: 6px 0; border-top: 1px solid var(--line); }
+  .skill-line .cat { font-size: 0.74rem; color: var(--faint); padding-top: 7px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chip { font-size: 0.78rem; padding: 4px 10px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface); color: var(--ink); }
+  @media (max-width: 620px){ .skills-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- projects ---------- */
+  .projects { display: flex; flex-direction: column; gap: 16px; }
+  .project {
+    display: block; background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: 24px 26px;
+    transition: transform .18s, border-color .18s, box-shadow .18s;
+  }
+  .project:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 10px 30px -16px rgba(43,65,242,0.35); }
+  .p-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 10px; }
+  .p-cat { font-size: 0.68rem; letter-spacing: 0.08em; color: var(--accent); }
+  .p-arrow { color: var(--faint); transition: transform .18s, color .18s; }
+  .project:hover .p-arrow { transform: translate(3px,-3px); color: var(--accent); }
+  .p-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 1.3rem; letter-spacing: -0.01em; margin-bottom: 8px; }
+  .p-desc { color: var(--muted); font-size: 0.95rem; max-width: 62ch; margin-bottom: 16px; }
+  .p-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .p-tags span { font-size: 0.72rem; color: var(--faint); }
+  .p-tags span::before { content: "· "; color: var(--line); }
+  .p-tags span:first-child::before { content: ""; }
+
+  /* ---------- about ---------- */
+  .about-text { font-size: clamp(1.1rem, 2.4vw, 1.4rem); line-height: 1.55; max-width: 40ch; font-family: 'Space Grotesk', sans-serif; font-weight: 400; letter-spacing: -0.01em; }
+  .about-text + .about-text { margin-top: 22px; }
+  .edu { margin-top: 34px; display: grid; gap: 14px; }
+  .edu-item { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 0.92rem; }
+  .edu-item .when { color: var(--faint); font-size: 0.82rem; }
+  .edu-item .what b { font-weight: 600; }
+  .edu-item .what span { color: var(--muted); display: block; }
+  @media (max-width: 620px){ .edu-item { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* ---------- contact ---------- */
+  .contact { text-align: left; }
+  .contact h2 { font-size: clamp(1.9rem, 6vw, 3.2rem); margin-bottom: 18px; }
+  .contact .accent { color: var(--accent); }
+  .contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+
+  footer { border-top: 1px solid var(--line); padding: 26px 0 40px; }
+  .foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 0.78rem; color: var(--faint); }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 820px){
+    .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+    .hero { padding: 56px 0 40px; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .btn:hover, .project:hover { transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">Kristiyan<span>.</span></a>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/krisrozata" class="gh" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="border-top:none">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow mono">Software Engineer <b>// based in Bulgaria</b></div>
+        <h1>Kristiyan<br>Georgiev</h1>
+        <p class="hero-sub">I build real software across <b>C#</b>, <b>Java</b> and <b>Python</b> — and I care about keeping it clean.</p>
+        <div class="cta-row">
+          <a href="#work" class="btn primary">View my work</a>
+          <a href="https://github.com/krisrozata" class="btn" target="_blank" rel="noopener">GitHub</a>
+          <!-- replace with your real LinkedIn URL -->
+          <a href="https://www.linkedin.com/in/your-handle" class="btn" target="_blank" rel="noopener">LinkedIn</a>
+          <!-- replace with your real email -->
+          <a href="mailto:your.email@example.com" class="btn">Email</a>
+        </div>
+      </div>
+
+      <div class="spec reveal">
+        <div class="spec-head mono"><span class="dot"></span> status.txt</div>
+        <div class="spec-body mono">
+          <div class="spec-row"><span class="k">role</span><span class="v">SE student</span></div>
+          <div class="spec-row"><span class="k">focus</span><span class="v">Backend &amp; full-stack</span></div>
+          <div class="spec-row"><span class="k">learning</span><span class="v">DSA · system design</span></div>
+          <div class="spec-row"><span class="k">stack</span><span class="v">C# · Java · Python</span></div>
+          <div class="spec-row"><span class="k">status</span><span class="v live">● open to work</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-label mono reveal">SELECTED WORK</div>
+      <h2 class="reveal">Things I've built</h2>
+      <div class="projects" style="margin-top:30px">
+
+        <a href="https://github.com/krisrozata/vector-graphics-editor" target="_blank" rel="noopener" class="project reveal">
+          <div class="p-top">
+            <span class="p-cat mono">DESKTOP</span>
+            <span class="p-arrow">↗</span>
+          </div>
+          <div class="p-title">Vector Graphics Editor</div>
+          <p class="p-desc">A desktop editor for drawing, transforming and grouping 2D shapes. Built around the Composite pattern, so a group of shapes behaves exactly like a single one.</p>
+          <div class="p-tags mono"><span>C#</span><span>Windows Forms</span><span>Design Patterns</span><span>GDI+</span></div>
+        </a>
+
+        <a href="https://github.com/krisrozata/BarberShop" target="_blank" rel="noopener" class="project reveal">
+          <div class="p-top">
+            <span class="p-cat mono">WEB</span>
+            <span class="p-arrow">↗</span>
+          </div>
+          <div class="p-title">Barbershop Booking</div>
+          <p class="p-desc">A Django web app for booking and managing barbershop appointments, with an admin panel for staff to handle services, barbers and blocked days.</p>
+          <div class="p-tags mono"><span>Python</span><span>Django</span><span>SQLite</span></div>
+        </a>
+
+        <a href="https://github.com/krisrozata/barbershop-management" target="_blank" rel="noopener" class="project reveal">
+          <div class="p-top">
+            <span class="p-cat mono">BACKEND · TESTS</span>
+            <span class="p-arrow">↗</span>
+          </div>
+          <div class="p-title">Barbershop Management</div>
+          <p class="p-desc">The barbershop domain modelled in Java and verified with Cucumber behaviour-driven tests — readable Given/When/Then scenarios covering the business rules and validation.</p>
+          <div class="p-tags mono"><span>Java</span><span>Cucumber</span><span>BDD</span><span>Maven</span></div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-label mono reveal">TOOLBOX</div>
+      <h2 class="reveal" style="margin-bottom:30px">What I work with</h2>
+      <div class="skills-grid reveal">
+        <div class="skill-line"><span class="cat mono">languages</span><div class="chips"><span class="chip">C#</span><span class="chip">Java</span><span class="chip">Python</span><span class="chip">SQL</span></div></div>
+        <div class="skill-line"><span class="cat mono">web</span><div class="chips"><span class="chip">Django</span><span class="chip">HTML</span><span class="chip">CSS</span></div></div>
+        <div class="skill-line"><span class="cat mono">desktop</span><div class="chips"><span class="chip">.NET</span><span class="chip">Windows Forms</span></div></div>
+        <div class="skill-line"><span class="cat mono">testing</span><div class="chips"><span class="chip">Cucumber</span><span class="chip">BDD</span></div></div>
+        <div class="skill-line"><span class="cat mono">data &amp; bi</span><div class="chips"><span class="chip">Power BI</span><span class="chip">DAX</span></div></div>
+        <div class="skill-line"><span class="cat mono">tools</span><div class="chips"><span class="chip">Git</span><span class="chip">Visual Studio</span><span class="chip">IntelliJ</span><span class="chip">PyCharm</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-label mono reveal">ABOUT</div>
+      <p class="about-text reveal">I'm a software engineering student at Plovdiv University who learns by building.</p>
+      <p class="about-text reveal" style="color:var(--muted)">I like taking an idea all the way to working software and keeping the code clean and well-structured on the way there. Right now I'm going deeper into data structures, algorithms and system design — while looking for my first role on a real team.</p>
+
+      <div class="edu">
+        <div class="edu-item reveal">
+          <span class="when mono">Education</span>
+          <div class="what"><b>Plovdiv University — FMI</b><span>Software Engineering</span></div>
+        </div>
+        <div class="edu-item reveal">
+          <span class="when mono">Certificate</span>
+          <div class="what"><b>Python Advanced</b><span>Completed certification</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div class="sec-label mono reveal">CONTACT</div>
+      <h2 class="reveal">Let's build<br>something <span class="accent">together.</span></h2>
+      <p class="reveal" style="color:var(--muted); max-width:42ch">Open to junior / entry-level developer roles and internships. The fastest way to reach me is email or LinkedIn.</p>
+      <div class="contact-links reveal">
+        <!-- replace with your real email -->
+        <a href="mailto:your.email@example.com" class="btn primary">Email me</a>
+        <a href="https://github.com/krisrozata" class="btn" target="_blank" rel="noopener">GitHub</a>
+        <!-- replace with your real LinkedIn URL -->
+        <a href="https://www.linkedin.com/in/your-handle" class="btn" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="mono">© 2026 Kristiyan Georgiev</span>
+    <span class="mono">Built with HTML &amp; CSS</span>
+  </div>
+</footer>
+
+<script>
+  // gentle scroll reveal, respecting reduced motion
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
